@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Custom untuk UMKM | Bistech</title>
+  <meta name="description" content="Jasa pembuatan aplikasi bisa custom sesua kebutuhan pengguna. Setup cepat, support selamanya. Konsultasi gratis via WhatsApp.">
+  <meta name="keywords" content="aplikasi kasir, software inventory, aplikasi custom, software UMKM, jasa pembuatan aplikasi">
+  <meta name="author" content="Bistech">
+  
+  <!-- Open Graph untuk share ke sosmed -->
+  <meta property="og:title" content="Aplikasi Custom untuk UMKM | Bistech">
+  <meta property="og:description" content="Jasa pembuatan aplikasi bisa custom sesua kebutuhan pengguna.">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon (emoji) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+  
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* ===== NAVBAR ===== */
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+    
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #eff6ff 0%, #fff 100%);
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: #1e293b;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+    }
+    
+    .btn-wa {
+      background: #25d366;
+    }
+    
+    .btn-wa:hover {
+      background: #1da851;
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+    }
+    
+    /* ===== SECTION ===== */
+    section {
+      padding: 70px 0;
+    }
+    
+    section h2 {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 50px;
+      font-size: 17px;
+    }
+    
+    /* ===== CARDS GRID ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: 0.3s;
+      border: 1px solid #f1f5f9;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      border-color: #dbeafe;
+    }
+    
+    .card h3 {
+      color: #2563eb;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+    
+    .card p {
+      color: #64748b;
+      font-size: 15px;
+    }
+    
+    /* ===== PRICING ===== */
+    .pricing-card {
+      text-align: center;
+      position: relative;
+    }
+    
+    .pricing-card .price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 15px 0;
+    }
+    
+    .pricing-card ul {
+      list-style: none;
+      text-align: left;
+      margin: 20px 0;
+    }
+    
+    .pricing-card ul li {
+      padding: 8px 0;
+      color: #555;
+      font-size: 15px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .pricing-card ul li:last-child {
+      border-bottom: none;
+    }
+    
+    .pricing-card ul li::before {
+      content: "✓ ";
+      color: #25d366;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .featured {
+      border: 2px solid #2563eb;
+      transform: scale(1.03);
+    }
+    
+    .featured:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+    
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2563eb;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    /* ===== FAQ ===== */
+    .faq-item {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    
+    .faq-item summary {
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+      position: relative;
+      transition: 0.3s;
+    }
+    
+    .faq-item summary:hover {
+      background: #f8fafc;
+    }
+    
+    .faq-item summary::after {
+      content: "+";
+      position: absolute;
+      right: 22px;
+      font-size: 22px;
+      color: #2563eb;
+      transition: 0.3s;
+    }
+    
+    .faq-item[open] summary::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+    
+    .faq-item[open] summary {
+      background: #eff6ff;
+    }
+    
+    .faq-item p {
+      padding: 0 22px 18px;
+      color: #64748b;
+      font-size: 15px;
+    }
+    
+    /* ===== FORM ===== */
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 13px 16px;
+      margin-bottom: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: 0.3s;
+    }
+    
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    /* ===== CTA SECTION ===== */
+    .cta {
+      background: #1e293b;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .cta h2 {
+      color: #fff;
+    }
+    
+    .cta p {
+      color: #cbd5e1;
+      margin-bottom: 30px;
+      font-size: 17px;
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 35px 0;
+      text-align: center;
+      font-size: 14px;
+    }
+    
+    footer p {
+      margin-bottom: 6px;
+    }
+    
+    footer a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ===== WHATSAPP FLOAT ===== */
+    .wa-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25d366;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      z-index: 999;
+      transition: 0.3s;
+      animation: pulse 2s infinite;
+    }
+    
+    .wa-float:hover {
+      transform: scale(1.1);
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      section h2 {
+        font-size: 26px;
+      }
+      
+      .featured {
+        transform: scale(1);
+      }
+      
+      .featured:hover {
+        transform: translateY(-5px);
+      }
+      
+      .wa-float {
+        width: 55px;
+        height: 55px;
+        font-size: 26px;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="container">
+    <div class="logo">💻 Bisstech Solution</div>
+    <div class="nav-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#portofolio">Portofolio</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <h1>Aplikasi Custom untuk Semua Bisnis Anda</h1>
+    <p>Jasa pembuatan aplikasi bisa custom sesua kebutuhan pengguna. Setup cepat, support selamanya.</p>
+    <a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20konsultasi%20aplikasi" class="btn btn-wa">💬 Konsultasi Gratis</a>
+  </div>
+</section>
+
+<!-- ===== LAYANAN ===== -->
+<section id="layanan">
+  <div class="container">
+    <h2>Layanan Kami</h2>
+    <p class="subtitle">Solusi digital sesuai kebutuhan bisnis Anda</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🛒 Aplikasi Kasir (POS)</h3>
+        <p>Sistem kasir modern dengan laporan real-time, manajemen stok, dan multi-outlet.</p>
+      </div>
+      <div class="card">
+        <h3>📦 Manajemen Inventory</h3>
+        <p>Kontrol stok gudang, tracking barang masuk-keluar, dan notifikasi stok minimum.</p>
+      </div>
+      <div class="card">
+        <h3>👥 HR & Payroll</h3>
+        <p>Kelola karyawan, absensi, dan penggajian otomatis dalam satu aplikasi.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Dashboard & Laporan</h3>
+        <p>Visualisasi data bisnis Anda dalam dashboard interaktif yang mudah dipahami.</p>
+      </div>
+      <div class="card">
+        <h3>🔧 Aplikasi Custom</h3>
+        <p>Butuh fitur spesifik? Kami bangun aplikasi dari nol sesuai proses bisnis Anda.</p>
+      </div>
+      <div class="card">
+        <h3>🛠️ Maintenance & Support</h3>
+        <p>Update rutin, perbaikan bug, dan support teknis untuk aplikasi yang sudah berjalan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTOFOLIO ===== -->
+<section id="portofolio" style="background: #f8fafc;">
+  <div class="container">
+    <h2>Portofolio</h2>
+    <p class="subtitle">Beberapa proyek yang telah kami kerjakan</p>
+    <div class="grid">
+      <div class="card">
+        <h3>🥖 Kasir Toko Roti</h3>
+        <p>Meningkatkan efisiensi transaksi 40% dan mengurangi kesalahan stok hingga 90%.</p>
+      </div>
+      <div class="card">
+        <h3>📦 Inventory Distributor</h3>
+        <p>Mengelola 5000+ SKU dengan tracking otomatis dan laporan harian real-time.</p>
+      </div>
+      <div class="card">
+        <h3>🏥 HR Klinik Kesehatan</h3>
+        <p>Otomatisasi absensi & payroll untuk 50+ karyawan, hemat 20 jam kerja per bulan.</p>
+      </div>
+      <div class="card">
+        <h3>🍽️ POS Restoran</h3>
+        <p>Sistem order dan kasir terintegrasi, mempercepat layanan 35% saat jam sibuk.</p>
+      </div>
+      <div class="card">
+        <h3>🚚 Tracking Logistik</h3>
+        <p>Monitoring pengiriman real-time untuk 100+ kurir, mengurangi komplain 50%.</p>
+      </div>
+      <div class="card">
+        <h3>🏪 Multi-Outlet Retail</h3>
+        <p>Sinkronisasi stok & penjualan 12 cabang dalam satu dashboard terpusat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HARGA ===== -->
+<section id="harga">
+  <div class="container">
+    <h2>Paket Harga</h2>
+    <p class="subtitle">Pilih paket sesuai kebutuhan bisnis Anda</p>
+    <div class="grid">
+      <div class="card pricing-card">
+        <h3>Starter</h3>
+        <div class="price">Rp 5 Juta</div>
+        <ul>
+          <li>Aplikasi 1 modul</li>
+          <li>Setup & training</li>
+          <li>Support 3 bulan</li>
+          <li>Hosting 1 tahun</li>
+        </ul>
+        <a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20paket%20Starter" class="btn">Pilih Paket</a>
+      </div>
+      
+      <div class="card pricing-card featured">
+        <span class="badge">POPULER</span>
+        <h3>Bisnis</h3>
+        <div class="price">Rp 15 Juta</div>
+        <ul>
+          <li>Aplikasi 3 modul</li>
+          <li>Custom fitur</li>
+          <li>Support 1 tahun</li>
+          <li>Hosting 1 tahun</li>
+          <li>Training tim</li>
+        </ul>
+        <a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20paket%20Bisnis" class="btn btn-wa">Pilih Paket</a>
+      </div>
+      
+      <div class="card pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <ul>
+          <li>Unlimited modul</li>
+          <li>Integrasi sistem lama</li>
+          <li>Support prioritas</li>
+          <li>Dedicated server</li>
+          <li>SLA terjamin</li>
+        </ul>
+        <a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20paket%20Enterprise" class="btn">Hubungi Kami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="background: #f8fafc;">
+  <div class="container">
+    <h2>Pertanyaan Umum</h2>
+    <p class="subtitle">Jawaban untuk pertanyaan yang sering ditanyakan</p>
+    
+    <div style="max-width: 750px; margin: 0 auto;">
+      <details class="faq-item">
+        <summary>Berapa lama proses pembuatan aplikasi?</summary>
+        <p>Untuk paket Starter sekitar 2-3 minggu. Paket Bisnis 1-2 bulan. Untuk Enterprise tergantung kompleksitas, biasanya 2-4 bulan.</p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Apakah bisa custom sesuai proses bisnis saya?</summary>
+        <p>Tentu! Itu keunggulan aplikasi custom. Kami akan pelajari alur bisnis Anda dulu, lalu bangun aplikasi yang sesuai — bukan sebaliknya.</p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Bagaimana sistem pembayarannya?</summary>
+        <p>DP 50% di awal, 30% saat progress, 20% saat selesai. Untuk paket Enterprise bisa dinegosiasikan sesuai milestone.</p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Apakah ada biaya bulanan?</summary>
+        <p>Untuk hosting & maintenance opsional mulai Rp 300rb/bulan. Tidak wajib — klien bisa self-host jika mau.</p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Apakah source code jadi milik saya?</summary>
+        <p>Ya, untuk paket Bisnis & Enterprise source code sepenuhnya milik klien. Untuk Starter, source code bisa dibeli terpisah.</p>
+      </details>
+      
+      <details class="faq-item">
+        <summary>Bagaimana kalau ada bug setelah selesai?</summary>
+        <p>Selama masa support (3 bulan - 1 tahun tergantung paket), perbaikan bug gratis. Setelah itu bisa perpanjang kontrak maintenance.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KONTAK ===== -->
+<section id="kontak">
+  <div class="container">
+    <h2>Hubungi Kami</h2>
+    <p class="subtitle">Isi form di bawah, kami balas dalam 1x24 jam</p>
+    
+    <form class="contact-form" action="https://formspree.io/f/xxxxx" method="POST">
+      <input type="text" name="nama" placeholder="Nama Anda" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="wa" placeholder="No. WhatsApp" required>
+      <textarea name="pesan" placeholder="Ceritakan kebutuhan aplikasi Anda..." required></textarea>
+      <button type="submit" class="btn" style="width: 100%;">Kirim Pesan</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="container">
+    <h2>Siap Digitalisasi Bisnis Anda?</h2>
+    <p>Konsultasi gratis, tanpa komitmen. Ceritakan kebutuhan Anda.</p>
+    <a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20konsultasi" class="btn btn-wa">💬 Chat WhatsApp Sekarang</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <p>© 2026 Bisstech</p>
+    <p>Email: <a href="mailto:bisstech@gmail.com">bisstech@gmail.com</a> | WA: <a href="https://wa.me/628123456789">0812-3456-789</a></p>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FLOAT ===== -->
+<a href="https://wa.me/628123456789?text=Halo,%20saya%20mau%20konsultasi" class="wa-float" aria-label="Chat WhatsApp">💬</a>
+
+</body>
+</html>
