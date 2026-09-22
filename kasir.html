@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasir — Demo Kasir POS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 h-screen overflow-hidden">
+
+<div class="flex h-screen">
+  
+  <!-- SIDEBAR -->
+  <aside class="w-56 bg-slate-900 text-white flex flex-col flex-shrink-0">
+    <div class="p-5 border-b border-slate-800">
+      <h1 class="text-xl font-bold">💰 Kasir POS</h1>
+      <p class="text-xs text-slate-400 mt-1">Demo v1.2.1</p>
+    </div>
+    <nav class="flex-1 p-3 space-y-1">
+      <a href="kasir.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white">
+        <span>🛒</span> <span>Kasir</span>
+      </a>
+      <a href="produk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800">
+        <span>📦</span> <span>Produk</span>
+      </a>
+      <a href="kategori.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800">
+        <span>📁</span> <span>Kategori</span>
+      </a>
+      <a href="riwayat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800">
+        <span>📋</span> <span>Riwayat</span>
+      </a>
+      <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800">
+        <span>📊</span> <span>Laporan</span>
+      </a>
+      <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800">
+        <span>⚙️</span> <span>Pengaturan</span>
+      </a>
+    </nav>
+    <div class="p-4 text-xs text-slate-500 border-t border-slate-800">
+      <a href="index.html" class="hover:text-slate-300">← Kembali ke Home</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 flex overflow-hidden">
+
+    <!-- KIRI: PRODUK -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- TOPBAR -->
+      <div class="bg-white border-b px-6 py-3 flex items-center justify-between">
+        <h1 class="text-xl font-bold text-gray-800">🛒 Kasir</h1>
+        <div class="flex items-center gap-4 text-xs text-gray-500">
+          <span><kbd class="px-1.5 py-0.5 bg-gray-100 border rounded">F1</kbd> Cari</span>
+          <span><kbd class="px-1.5 py-0.5 bg-gray-100 border rounded">F2</kbd> Bayar</span>
+          <span class="font-mono text-gray-700" id="clock">⏰ 14:35</span>
+        </div>
+      </div>
+
+      <div class="flex-1 p-6 overflow-hidden flex flex-col">
+        <!-- SEARCH -->
+        <div class="flex gap-2 mb-3">
+          <div class="flex-1 relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+            <input
+              type="text"
+              placeholder="Cari produk..."
+              class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+              oninput="filterProducts(this.value)"
+            />
+          </div>
+        </div>
+
+        <!-- KATEGORI DROPDOWN -->
+        <div class="mb-4 relative inline-block max-w-xs">
+          <button onclick="toggleDropdown()" class="w-full flex items-center justify-between gap-2 px-4 py-2.5 bg-white border-2 border-gray-200 rounded-xl hover:border-blue-400 transition">
+            <span class="flex items-center gap-2 text-sm font-semibold">
+              <span>📋</span>
+              <span>Semua Kategori</span>
+              <span class="text-xs text-gray-500">(8)</span>
+            </span>
+            <span class="text-gray-400 text-xs">▼</span>
+          </button>
+          <div id="dropdown" class="hidden absolute top-full left-0 mt-1 w-full bg-white border-2 border-gray-200 rounded-xl shadow-lg z-50">
+            <button onclick="selectCategory('all')" class="w-full flex justify-between px-4 py-2.5 text-left text-sm hover:bg-gray-50 bg-blue-50 text-blue-700 font-semibold rounded-t-xl border-b">
+              <span>📋 Semua Kategori</span>
+              <span class="text-xs bg-blue-200 px-2 py-0.5 rounded-full">8</span>
+            </button>
+            <button onclick="selectCategory('Minuman')" class="w-full flex justify-between px-4 py-2.5 text-left text-sm hover:bg-gray-50 border-b">
+              <span>☕ Minuman</span>
+              <span class="text-xs bg-gray-100 px-2 py-0.5 rounded-full">3</span>
+            </button>
+            <button onclick="selectCategory('Makanan')" class="w-full flex justify-between px-4 py-2.5 text-left text-sm hover:bg-gray-50 border-b">
+              <span>🍜 Makanan</span>
+              <span class="text-xs bg-gray-100 px-2 py-0.5 rounded-full">2</span>
+            </button>
+            <button onclick="selectCategory('Buah')" class="w-full flex justify-between px-4 py-2.5 text-left text-sm hover:bg-gray-50 border-b">
+              <span>🍎 Buah</span>
+              <span class="text-xs bg-gray-100 px-2 py-0.5 rounded-full">1</span>
+            </button>
+            <button onclick="selectCategory('Sembako')" class="w-full flex justify-between px-4 py-2.5 text-left text-sm hover:bg-gray-50 rounded-b-xl">
+              <span>🌾 Sembako</span>
+              <span class="text-xs bg-gray-100 px-2 py-0.5 rounded-full">2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- GRID PRODUK -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto pb-4" id="productGrid">
+          <!-- JS akan inject -->
+        </div>
+      </div>
+    </div>
+
+    <!-- KANAN: CART -->
+    <div class="w-96 bg-white border-l flex flex-col">
+      <div class="p-4 border-b flex justify-between items-center">
+        <h3 class="font-bold text-lg">🛒 Keranjang</h3>
+        <button onclick="clearCart()" class="text-xs text-red-500 hover:underline">Kosongkan</button>
+      </div>
+
+      <div class="flex-1 overflow-auto p-4 space-y-2" id="cartList">
+        <p class="text-center text-gray-400 py-10">Belum ada item</p>
+      </div>
+
+      <div class="border-t p-4 space-y-3">
+        <div class="space-y-1 text-sm border-b pb-2">
+          <div class="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span id="subtotal">Rp 0</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold pt-1 border-t">
+            <span>Total</span>
+            <span class="text-blue-600" id="total">Rp 0</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs text-gray-500 mb-1 block">Pembayaran</label>
+          <div class="grid grid-cols-4 gap-1">
+            <button onclick="setPayment('CASH')" id="pm-CASH" class="py-2 text-xs rounded-lg font-semibold bg-blue-600 text-white">CASH</button>
+            <button onclick="setPayment('QRIS')" id="pm-QRIS" class="py-2 text-xs rounded-lg font-semibold bg-gray-100">QRIS</button>
+            <button onclick="setPayment('DEBIT')" id="pm-DEBIT" class="py-2 text-xs rounded-lg font-semibold bg-gray-100">DEBIT</button>
+            <button onclick="setPayment('TRANSFER')" id="pm-TRANSFER" class="py-2 text-xs rounded-lg font-semibold bg-gray-100">TRF</button>
+          </div>
+        </div>
+
+        <input
+          type="number"
+          id="paidInput"
+          placeholder="Bayar"
+          class="w-full px-3 py-2 border rounded-lg"
+          oninput="updateChange()"
+        />
+
+        <div class="grid grid-cols-4 gap-1">
+          <button onclick="setPaid('exact')" class="py-2 text-xs bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 font-semibold">Uang Pas</button>
+          <button onclick="setPaid(20000)" class="py-2 text-xs bg-gray-100 rounded-lg hover:bg-gray-200">20rb</button>
+          <button onclick="setPaid(50000)" class="py-2 text-xs bg-gray-100 rounded-lg hover:bg-gray-200">50rb</button>
+          <button onclick="setPaid(100000)" class="py-2 text-xs bg-gray-100 rounded-lg hover:bg-gray-200">100rb</button>
+        </div>
+
+        <div class="flex justify-between text-sm" id="changeRow" style="display:none;">
+          <span>Kembalian</span>
+          <span class="text-green-600 font-bold" id="change">Rp 0</span>
+        </div>
+
+        <button
+          onclick="checkout()"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold disabled:bg-gray-300"
+          id="checkoutBtn"
+          disabled
+        >
+          💳 Bayar <span id="checkoutTotal">Rp 0</span>
+        </button>
+
+        <button class="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-semibold">
+          👁️ Preview Struk
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL STRUK -->
+<div id="receiptModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl p-6 w-96">
+    <h3 class="text-xl font-bold text-center mb-4">✅ Transaksi Berhasil</h3>
+    <div class="space-y-2 text-sm border-t border-b py-4">
+      <div class="flex justify-between"><span>Invoice</span><span class="font-mono" id="rInvoice">INV-...</span></div>
+      <div class="flex justify-between"><span>Metode</span><span id="rPayment">CASH</span></div>
+      <div class="flex justify-between"><span>Total</span><span id="rTotal">Rp 0</span></div>
+      <div class="flex justify-between"><span>Bayar</span><span id="rPaid">Rp 0</span></div>
+      <div class="flex justify-between font-bold"><span>Kembali</span><span class="text-green-600" id="rChange">Rp 0</span></div>
+    </div>
+    <div class="flex gap-2 mt-4">
+      <button onclick="alert('Demo: print struk')" class="flex-1 py-2 bg-green-600 text-white rounded-lg font-semibold">🖨️ Print</button>
+      <button onclick="closeReceipt()" class="flex-1 py-2 bg-blue-600 text-white rounded-lg font-semibold">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // ============================================
+  // DUMMY DATA
+  // ============================================
+  const PRODUCTS = [
+    { id: "1", name: "Kopi Susu", price: 18000, stock: 50, category: "Minuman", emoji: "☕", color: "blue" },
+    { id: "2", name: "Teh Manis", price: 8000, stock: 100, category: "Minuman", emoji: "☕", color: "blue" },
+    { id: "3", name: "Es Jeruk", price: 12000, stock: 30, category: "Minuman", emoji: "☕", color: "blue" },
+    { id: "4", name: "Nasi Goreng", price: 25000, stock: 30, category: "Makanan", emoji: "🍜", color: "orange" },
+    { id: "5", name: "Mie Ayam", price: 20000, stock: 25, category: "Makanan", emoji: "🍜", color: "orange" },
+    { id: "6", name: "Apel Fuji", price: 35000, stock: 8.5, category: "Buah", emoji: "🍎", color: "red", weighted: true, unit: "kg" },
+    { id: "7", name: "Indomie Goreng", price: 3000, stock: 240, category: "Sembako", emoji: "🌾", color: "yellow", tiers: [
+      { min_qty: 1, price: 3500, label: "Ecer" },
+      { min_qty: 40, price: 3000, label: "Grosir" }
+    ]},
+    { id: "8", name: "Beras Premium", price: 15000, stock: 50, category: "Sembako", emoji: "🌾", color: "yellow" }
+  ];
+
+  let cart = [];
+  let payment = "CASH";
+  let paidAmount = 0;
+
+  // ============================================
+  // RENDER PRODUK
+  // ============================================
+  function renderProducts(filter = "") {
+    const grid = document.getElementById("productGrid");
+    const filtered = PRODUCTS.filter(p =>
+      p.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-10">Tidak ada produk</p>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(p => {
+      const colorClass = {
+        blue: "bg-blue-50 border-blue-200",
+        orange: "bg-orange-50 border-orange-200",
+        red: "bg-red-50 border-red-200",
+        yellow: "bg-yellow-50 border-yellow-200"
+      }[p.color] || "bg-gray-50 border-gray-200";
+
+      const priceDisplay = p.tiers
+        ? `<div class="text-blue-600 font-bold mt-2"><span class="text-xs text-gray-500">dari </span>Rp ${p.tiers[0].price.toLocaleString("id-ID")}</div>`
+        : `<div class="text-blue-600 font-bold mt-2">Rp ${p.price.toLocaleString("id-ID")}${p.weighted ? `<span class="text-xs text-gray-500 font-normal">/${p.unit}</span>` : ""}</div>`;
+
+      const badges = `
+        ${p.weighted ? `<span class="text-xs bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded">⚖️</span>` : ""}
+        ${p.tiers ? `<span class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">💰</span>` : ""}
+      `;
+
+      return `
+        <button onclick="addToCart('${p.id}')" class="${colorClass} border-2 rounded-xl p-4 text-left hover:shadow-lg transition">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">${p.category}</span>
+            <div class="flex gap-1">${badges}</div>
+          </div>
+          <p class="font-semibold text-sm min-h-[2.5rem]">${p.name}</p>
+          ${priceDisplay}
+          <p class="text-xs mt-1 ${p.stock > 10 ? "text-gray-500" : "text-orange-600 font-semibold"}">
+            ${p.stock > 10 ? "🟢" : "🟡"} Stok: ${p.weighted ? p.stock + " " + p.unit : Math.floor(p.stock)}
+          </p>
+        </button>
+      `;
+    }).join("");
+  }
+
+  // ============================================
+  // CART
+  // ============================================
+  function addToCart(id) {
+    const product = PRODUCTS.find(p => p.id === id);
+    if (!product) return;
+
+    if (product.weighted) {
+      const weight = prompt(`⚖️ ${product.name}\n\nMasukkan berat (kg):`, "0.5");
+      if (!weight || isNaN(weight) || Number(weight) <= 0) return;
+      cart.push({
+        ...product,
+        qty: Number(weight),
+        is_weighted: true,
+        unit: product.unit
+      });
+    } else {
+      const existing = cart.find(c => c.id === id && !c.is_weighted);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+    }
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById("cartList");
+
+    if (cart.length === 0) {
+      list.innerHTML = `<p class="text-center text-gray-400 py-10">Belum ada item</p>`;
+      updateTotals();
+      return;
+    }
+
+    list.innerHTML = cart.map((item, idx) => `
+      <div class="p-2 bg-gray-50 rounded-lg space-y-1">
+        <div class="flex items-center gap-2">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium truncate">${item.is_weighted ? "⚖️ " : ""}${item.name}</p>
+            <p class="text-xs text-gray-500">
+              ${item.is_weighted
+                ? `${item.qty} ${item.unit} × Rp ${item.price.toLocaleString("id-ID")}`
+                : `Rp ${item.price.toLocaleString("id-ID")}`}
+            </p>
+          </div>
+          ${!item.is_weighted ? `
+            <div class="flex items-center gap-1">
+              <button onclick="changeQty(${idx}, ${item.qty - 1})" class="w-6 h-6 bg-gray-200 rounded hover:bg-gray-300 font-bold">−</button>
+              <span class="w-8 text-center text-sm font-bold">${item.qty}</span>
+              <button onclick="changeQty(${idx}, ${item.qty + 1})" class="w-6 h-6 bg-gray-200 rounded hover:bg-gray-300 font-bold">+</button>
+            </div>
+          ` : `
+            <span class="text-sm font-bold">Rp ${(item.price * item.qty).toLocaleString("id-ID")}</span>
+          `}
+          <button onclick="removeItem(${idx})" class="text-red-500 text-xs hover:underline">✕</button>
+        </div>
+      </div>
+    `).join("");
+
+    updateTotals();
+  }
+
+  function changeQty(idx, newQty) {
+    if (newQty <= 0) {
+      cart.splice(idx, 1);
+    } else {
+      cart[idx].qty = newQty;
+    }
+    renderCart();
+  }
+
+  function removeItem(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function clearCart() {
+    if (cart.length === 0) return;
+    if (!confirm("Kosongkan keranjang?")) return;
+    cart = [];
+    paidAmount = 0;
+    document.getElementById("paidInput").value = "";
+    renderCart();
+  }
+
+  // ============================================
+  // TOTALS
+  // ============================================
+  function getSubtotal() {
+    return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  function updateTotals() {
+    const sub = getSubtotal();
+    document.getElementById("subtotal").textContent = "Rp " + sub.toLocaleString("id-ID");
+    document.getElementById("total").textContent = "Rp " + sub.toLocaleString("id-ID");
+    document.getElementById("checkoutTotal").textContent = "Rp " + sub.toLocaleString("id-ID");
+
+    const btn = document.getElementById("checkoutBtn");
+    btn.disabled = cart.length === 0;
+    if (payment === "CASH") {
+      btn.disabled = btn.disabled || paidAmount < sub;
+    }
+
+    updateChange();
+  }
+
+  // ============================================
+  // PAYMENT
+  // ============================================
+  function setPayment(method) {
+    payment = method;
+    ["CASH", "QRIS", "DEBIT", "TRANSFER"].forEach(m => {
+      const btn = document.getElementById("pm-" + m);
+      if (m === method) {
+        btn.className = "py-2 text-xs rounded-lg font-semibold bg-blue-600 text-white";
+      } else {
+        btn.className = "py-2 text-xs rounded-lg font-semibold bg-gray-100";
+      }
+    });
+    updateTotals();
+  }
+
+  function setPaid(val) {
+    const sub = getSubtotal();
+    paidAmount = val === "exact" ? sub : val;
+    document.getElementById("paidInput").value = paidAmount;
+    updateChange();
+    updateTotals();
+  }
+
+  function updateChange() {
+    const sub = getSubtotal();
+    const input = document.getElementById("paidInput");
+    paidAmount = Number(input.value) || 0;
+
+    const change = paidAmount - sub;
+    const row = document.getElementById
